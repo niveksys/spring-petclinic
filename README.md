@@ -1,2 +1,2 @@
 # Spring PetClinic Application
-Spring Boot version of the Petclinic application
+Spring Boot version of the PetClinic application
