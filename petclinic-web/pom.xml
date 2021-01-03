@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>com.niveksys</groupId>
 		<artifactId>spring-petclinic</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.4</version>
 	</parent>
 	<groupId>com.niveksys</groupId>
 	<artifactId>petclinic-web</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<name>petclinic-web</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.niveksys</groupId>
 			<artifactId>petclinic-data</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
