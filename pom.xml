@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.niveksys</groupId>
 	<artifactId>spring-petclinic</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
 	<name>spring-petclinic</name>
 	<description>Spring Boot version of the Petclinic application</description>
@@ -46,7 +46,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:niveksys/spring-petclinic.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>spring-petclinic-0.0.3</tag>
   </scm>
 
 </project>
