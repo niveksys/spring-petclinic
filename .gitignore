@@ -31,4 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Mac OSX ###
 .DS_Store
+
+### Maven Release Plugin ###
+release.properties
+*.releaseBackup
