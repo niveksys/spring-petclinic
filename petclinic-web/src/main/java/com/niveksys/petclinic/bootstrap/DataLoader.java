@@ -4,8 +4,6 @@ import com.niveksys.petclinic.model.Owner;
 import com.niveksys.petclinic.model.Vet;
 import com.niveksys.petclinic.service.OwnerService;
 import com.niveksys.petclinic.service.VetService;
-import com.niveksys.petclinic.service.map.OwnerMapService;
-import com.niveksys.petclinic.service.map.VetMapService;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -16,9 +14,9 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        this.ownerService = new OwnerMapService();
-        this.vetService = new VetMapService();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
