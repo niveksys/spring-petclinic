@@ -1,6 +1,9 @@
 package com.niveksys.petclinic.bootstrap;
 
+import java.time.LocalDate;
+
 import com.niveksys.petclinic.model.Owner;
+import com.niveksys.petclinic.model.Pet;
 import com.niveksys.petclinic.model.PetType;
 import com.niveksys.petclinic.model.Vet;
 import com.niveksys.petclinic.service.OwnerService;
@@ -37,6 +40,16 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Waston");
+        owner1.setAddress("123 Brickerel");
+        owner1.setCity("Miami");
+        owner1.setTelephone("1234567890");
+
+        Pet mikesPet = new Pet();
+        mikesPet.setName("Rosco");
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        owner1.getPets().add(mikesPet);
 
         ownerService.save(owner1);
 
@@ -44,6 +57,16 @@ public class DataLoader implements CommandLineRunner {
 
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("123 Brickerel");
+        owner2.setCity("Miami");
+        owner2.setTelephone("1234567890");
+
+        Pet fionaPet = new Pet();
+        fionaPet.setName("Kitty");
+        fionaPet.setPetType(savedCatPetType);
+        fionaPet.setOwner(owner2);
+        fionaPet.setBirthDate(LocalDate.now());
+        owner2.getPets().add(fionaPet);
 
         ownerService.save(owner2);
 
