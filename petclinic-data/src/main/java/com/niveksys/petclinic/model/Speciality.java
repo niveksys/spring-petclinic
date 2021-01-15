@@ -1,6 +1,8 @@
 package com.niveksys.petclinic.model;
 
-public class Specialty extends BaseEntity {
+public class Speciality extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
 
     private String description;
 
