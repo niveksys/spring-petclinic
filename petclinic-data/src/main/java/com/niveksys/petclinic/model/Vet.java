@@ -10,6 +10,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "vet")
 public class Vet extends Person {
@@ -18,13 +26,12 @@ public class Vet extends Person {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specilaity", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "speciality_id"))
-    private Set<Speciality> specialties = new HashSet<>();
+    private Set<Speciality> specialities = new HashSet<>();
 
-    public Set<Speciality> getSpecialties() {
-        return specialties;
+    @Builder
+    public Vet(String firstName, String lastName, Set<Speciality> specialities) {
+        super(firstName, lastName);
+        this.specialities = specialities;
     }
 
-    public void setSpecialties(Set<Speciality> specialties) {
-        this.specialties = specialties;
-    }
 }
