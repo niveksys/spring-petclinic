@@ -7,10 +7,12 @@ import com.niveksys.petclinic.model.Pet;
 import com.niveksys.petclinic.model.PetType;
 import com.niveksys.petclinic.model.Speciality;
 import com.niveksys.petclinic.model.Vet;
+import com.niveksys.petclinic.model.Visit;
 import com.niveksys.petclinic.service.OwnerService;
 import com.niveksys.petclinic.service.PetTypeService;
 import com.niveksys.petclinic.service.SpecialityService;
 import com.niveksys.petclinic.service.VetService;
+import com.niveksys.petclinic.service.VisitService;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -22,13 +24,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-            SpecialityService specialityService) {
+            SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -74,7 +78,7 @@ public class DataLoader implements CommandLineRunner {
         mikesPet.setBirthday(LocalDate.now());
         owner1.getPets().add(mikesPet);
 
-        ownerService.save(owner1);
+        this.ownerService.save(owner1);
 
         Owner owner2 = new Owner();
 
@@ -91,23 +95,32 @@ public class DataLoader implements CommandLineRunner {
         fionaPet.setBirthday(LocalDate.now());
         owner2.getPets().add(fionaPet);
 
-        ownerService.save(owner2);
+        this.ownerService.save(owner2);
 
         System.out.println("Loaded Owners....");
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionaPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        this.visitService.save(catVisit);
+
+        System.out.println("Loaded Visits....");
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
         vet1.getSpecialties().add(savedRadiology);
 
-        vetService.save(vet1);
+        this.vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
         vet2.getSpecialties().add(savedSurgery);
 
-        vetService.save(vet2);
+        this.vetService.save(vet2);
 
         System.out.println("Loaded Vets....");
     }
