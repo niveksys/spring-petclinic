@@ -17,6 +17,9 @@ import com.niveksys.petclinic.service.VisitService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -52,6 +55,14 @@ public class DataLoader implements CommandLineRunner {
         cat.setName("Cat");
         PetType savedCatPetType = this.petTypeService.save(cat);
 
+        PetType bear = new PetType();
+        bear.setName("Bear");
+        PetType savedBearPetType = this.petTypeService.save(bear);
+
+        PetType rabbit = new PetType();
+        rabbit.setName("Rabbit");
+        PetType savedRabbitPetType = this.petTypeService.save(rabbit);
+
         Speciality radiology = new Speciality();
         radiology.setDescription("radiology");
         Speciality savedRadiology = this.specialityService.save(radiology);
@@ -65,48 +76,48 @@ public class DataLoader implements CommandLineRunner {
         Speciality savedDentistry = this.specialityService.save(dentistry);
 
         Owner owner1 = new Owner();
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Waston");
-        owner1.setAddress("123 Brickerel");
-        owner1.setCity("Miami");
+        owner1.setFirstName("Kevin");
+        owner1.setLastName("Tsang");
+        owner1.setAddress("123 Meadowland");
+        owner1.setCity("London");
         owner1.setTelephone("1234567890");
 
-        Pet mikesPet = new Pet();
-        mikesPet.setName("Rosco");
-        mikesPet.setPetType(savedDogPetType);
-        mikesPet.setOwner(owner1);
-        mikesPet.setBirthday(LocalDate.now());
-        owner1.getPets().add(mikesPet);
+        Pet kevinPet = new Pet();
+        kevinPet.setName("Teddy");
+        kevinPet.setType(savedDogPetType);
+        kevinPet.setOwner(owner1);
+        kevinPet.setBirthday(LocalDate.now());
+        owner1.getPets().add(kevinPet);
 
         this.ownerService.save(owner1);
 
         Owner owner2 = new Owner();
 
-        owner2.setFirstName("Fiona");
-        owner2.setLastName("Glenanne");
-        owner2.setAddress("123 Brickerel");
-        owner2.setCity("Miami");
+        owner2.setFirstName("Joyce");
+        owner2.setLastName("Lau");
+        owner2.setAddress("123 Meadowland");
+        owner2.setCity("London");
         owner2.setTelephone("1234567890");
 
-        Pet fionaPet = new Pet();
-        fionaPet.setName("Kitty");
-        fionaPet.setPetType(savedCatPetType);
-        fionaPet.setOwner(owner2);
-        fionaPet.setBirthday(LocalDate.now());
-        owner2.getPets().add(fionaPet);
+        Pet joycePet = new Pet();
+        joycePet.setName("Cony");
+        joycePet.setType(savedRabbitPetType);
+        joycePet.setOwner(owner2);
+        joycePet.setBirthday(LocalDate.now());
+        owner2.getPets().add(joycePet);
 
         this.ownerService.save(owner2);
 
-        System.out.println("Loaded Owners....");
+        log.debug("Loaded Owners....");
 
-        Visit catVisit = new Visit();
-        catVisit.setPet(fionaPet);
-        catVisit.setDate(LocalDate.now());
-        catVisit.setDescription("Sneezy Kitty");
+        Visit rabbitVisit = new Visit();
+        rabbitVisit.setPet(joycePet);
+        rabbitVisit.setDate(LocalDate.now());
+        rabbitVisit.setDescription("Sneezy Rabbit");
 
-        this.visitService.save(catVisit);
+        this.visitService.save(rabbitVisit);
 
-        System.out.println("Loaded Visits....");
+        log.debug("Loaded Visits....");
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
@@ -122,7 +133,7 @@ public class DataLoader implements CommandLineRunner {
 
         this.vetService.save(vet2);
 
-        System.out.println("Loaded Vets....");
+        log.debug("Loaded Vets....");
     }
 
 }

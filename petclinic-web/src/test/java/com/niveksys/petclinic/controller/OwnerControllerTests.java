@@ -1,6 +1,9 @@
 package com.niveksys.petclinic.controller;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -43,25 +46,41 @@ public class OwnerControllerTests {
     }
 
     @Test
-    public void listOwners() throws Exception {
+    public void list() throws Exception {
+        // given
         when(this.ownerService.findAll()).thenReturn(this.owners);
 
-        this.mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/index"))
+        // when
+        this.mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/list"))
                 .andExpect(model().attribute("owners", hasSize(2)));
     }
 
     @Test
-    public void listOwnersByIndex() throws Exception {
+    public void listByIndex() throws Exception {
+        // given
         when(this.ownerService.findAll()).thenReturn(this.owners);
 
-        this.mockMvc.perform(get("/owners/index")).andExpect(status().isOk()).andExpect(view().name("owners/index"))
+        // when
+        this.mockMvc.perform(get("/owners/index")).andExpect(status().isOk()).andExpect(view().name("owners/list"))
                 .andExpect(model().attribute("owners", hasSize(2)));
     }
 
     @Test
-    public void findOwners() throws Exception {
-        mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("notimplemented"));
+    public void show() throws Exception {
+        // given
+        when(this.ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
 
+        // when
+        mockMvc.perform(get("/owners/123")).andExpect(status().isOk()).andExpect(view().name("owners/show"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
+    }
+
+    @Test
+    public void search() throws Exception {
+        // when
+        mockMvc.perform(get("/owners/search")).andExpect(status().isOk()).andExpect(view().name("notimplemented"));
+
+        // then
         verifyNoMoreInteractions(this.ownerService);
     }
 }

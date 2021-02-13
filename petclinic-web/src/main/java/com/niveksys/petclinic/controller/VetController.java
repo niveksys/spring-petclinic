@@ -6,7 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
+@RequestMapping("/vets")
 public class VetController {
 
     private final VetService vetService;
@@ -15,8 +19,9 @@ public class VetController {
         this.vetService = vetService;
     }
 
-    @RequestMapping({ "/vets", "/vets/index", "/vets/index.html", "/vets.html" })
-    public String listVats(Model model) {
+    @RequestMapping({ "", "/", "/index", "index.html" })
+    public String list(Model model) {
+        log.debug("LIST all Vets.");
         model.addAttribute("vets", this.vetService.findAll());
         return "vets/index";
     }
