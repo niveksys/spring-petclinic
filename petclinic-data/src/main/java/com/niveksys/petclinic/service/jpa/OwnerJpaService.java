@@ -1,6 +1,7 @@
 package com.niveksys.petclinic.service.jpa;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.niveksys.petclinic.model.Owner;
@@ -57,6 +58,11 @@ public class OwnerJpaService implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {
         return this.ownerRepository.findByLastName(lastName);
+    }
+
+    @Override
+    public List<Owner> findByLastNameContaining(String lastName) {
+        return this.ownerRepository.findByLastNameContaining(lastName);
     }
 
 }

@@ -1,6 +1,9 @@
 package com.niveksys.petclinic.service.map;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.niveksys.petclinic.model.Owner;
 import com.niveksys.petclinic.model.Pet;
@@ -71,6 +74,12 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     @Override
     public Owner findByLastName(String lastName) {
         return this.findAll().stream().filter(owner -> owner.getLastName().equals(lastName)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Owner> findByLastNameContaining(String lastName) {
+        return this.findAll().stream().filter(owner -> owner.getLastName().contains(lastName))
+                .collect(Collectors.toList());
     }
 
 }
