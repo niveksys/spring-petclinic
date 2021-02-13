@@ -91,11 +91,11 @@ public class OwnerControllerTests {
     @Test
     public void show() throws Exception {
         // given
-        when(this.ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
+        when(this.ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1L).build());
 
         // when
         mockMvc.perform(get("/owners/123")).andExpect(status().isOk()).andExpect(view().name("owners/show"))
-                .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
+                .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class OwnerControllerTests {
     public void findReturnMany() throws Exception {
         // given
         when(this.ownerService.findByLastNameContaining(anyString()))
-                .thenReturn(Arrays.asList(Owner.builder().id(1l).build(), Owner.builder().id(2l).build()));
+                .thenReturn(Arrays.asList(Owner.builder().id(1L).build(), Owner.builder().id(2L).build()));
 
         // when
         mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("owners/list"))
@@ -141,7 +141,7 @@ public class OwnerControllerTests {
     public void findReturnOne() throws Exception {
         // given
         when(this.ownerService.findByLastNameContaining(anyString()))
-                .thenReturn(Arrays.asList(Owner.builder().id(1l).build()));
+                .thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
 
         // when
         mockMvc.perform(get("/owners/find")).andExpect(status().is3xxRedirection())
