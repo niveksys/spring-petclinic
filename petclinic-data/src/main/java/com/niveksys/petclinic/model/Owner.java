@@ -42,6 +42,45 @@ public class Owner extends Person {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
+        if (pets != null) {
+            this.pets = pets;
+        }
+    }
+
+    public void addPet(Pet pet) {
+        this.pets.add(pet);
+        pet.setOwner(this);
+    }
+
+    public void removePet(Pet pet) {
+        pet.setOwner(null);
+        this.pets.remove(pet);
+    }
+
+    /**
+     * Return the Pet with the given name, or null if none found for this Owner.
+     *
+     * @param name to test
+     * @return true if pet name is already in use
+     */
+    public Pet getPet(String name) {
+        return getPet(name, false);
+    }
+
+    /**
+     * Return the Pet with the given name, or null if none found for this Owner.
+     *
+     * @param name to test
+     * @return true if pet name is already in use
+     */
+    public Pet getPet(String name, boolean ignoreNew) {
+        for (Pet pet : this.pets) {
+            if (!ignoreNew || !pet.isNew()) {
+                if (pet.getName().equalsIgnoreCase(name)) {
+                    return pet;
+                }
+            }
+        }
+        return null;
     }
 }

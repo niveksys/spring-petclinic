@@ -47,7 +47,7 @@ public class OwnerController {
 
     @GetMapping("/new")
     public String newOwner(Model model) {
-        log.debug("NEW Owner form.");
+        log.debug("NEW form for an Owner.");
         model.addAttribute("owner", Owner.builder().build());
         return OWNER_CREATE_OR_UPDATE_VIEW;
     }
@@ -92,7 +92,7 @@ public class OwnerController {
 
     @GetMapping("/search")
     public String search(Model model) {
-        log.debug("SEARCH form.");
+        log.debug("SEARCH form for Owner.");
         model.addAttribute("owner", Owner.builder().build());
         return "owners/search";
     }
