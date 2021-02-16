@@ -147,4 +147,15 @@ public class OwnerControllerTests {
         mockMvc.perform(get("/owners/find")).andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
     }
+
+    @Test
+    public void findEmptyReturnMany() throws Exception {
+        // given
+        when(this.ownerService.findByLastNameContaining(anyString()))
+                .thenReturn(Arrays.asList(Owner.builder().id(1L).build(), Owner.builder().id(2L).build()));
+
+        // when
+        mockMvc.perform(get("/owners/find").param("lastName", "")).andExpect(status().isOk())
+                .andExpect(view().name("owners/list")).andExpect(model().attribute("owners", hasSize(2)));
+    }
 }
