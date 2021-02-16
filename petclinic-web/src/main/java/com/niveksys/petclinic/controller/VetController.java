@@ -24,7 +24,7 @@ public class VetController {
     public String list(Model model) {
         log.debug("LIST all Vets.");
         model.addAttribute("vets", this.vetService.findAll());
-        return "vets/index";
+        return "vets/list";
     }
 
 }
